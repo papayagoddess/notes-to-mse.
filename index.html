@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes to Mse.</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Playfair+Display:ital,wght@1,400..700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* --- Blue & White Editorial Theme --- */
+            --bg-color: #ffffff;          
+            --text-color: #0d0d0d;        
+            --accent-color: #5b7c99;      
+            --border-color: #e2e8f0;      
+            --hover-blue: #2c5270;        
+            --img-fallback: #f8fafc;      
+
+            --font-main: 'Cormorant Garamond', serif;
+            --font-cursive: 'Playfair Display', serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;      
+            min-height: 100vh;        
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 450px; 
+            padding: 20px 25px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;   
+            justify-content: center;
+            transform: translateY(-65px); 
+        }
+
+        /* --- Main Content Area Container --- */
+        .content-area {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- Custom Stacked Profile Layout --- */
+        .profile-header {
+            display: flex;
+            flex-direction: column;   
+            align-items: flex-start;  
+            width: fit-content;       
+            margin: 0 auto 24px auto; 
+        }
+
+        /* Top Row: Anchors the handle to the bottom edge of the PFP to bring it closer to the bio */
+        .profile-top-row {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;    /* Changed from center to snap text to the bottom line of the row */
+            gap: 14px;                
+            margin-bottom: 4px;       /* Tighter structural spacing above the bio line */
+        }
+
+        .pfp-circle {
+            width: 78px;              
+            height: 78px;             
+            border-radius: 50%;
+            background-color: var(--img-fallback);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            flex-shrink: 0;           
+            box-shadow: 0 4px 12px rgba(91, 124, 153, 0.08); 
+        }
+
+        .pfp-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 65% center; 
+        }
+
+        /* Fluid, light, cursive handle tucked neatly downwards */
+        .handle {
+            font-family: var(--font-cursive);
+            font-style: italic;
+            font-weight: 400;         
+            font-size: 1.25rem;       
+            letter-spacing: -0.2px;
+            margin: 0;
+            color: var(--text-color);
+            line-height: 1;           /* Snug line-height to remove extra inner-font padding */
+            padding-bottom: 4px;      /* Tiny micro-adjustment to frame the bottom baseline nicely */
+        }
+
+        /* Bio: Runs straight along the bottom right under the text baseline */
+        .bio {
+            font-family: var(--font-main);
+            font-size: 0.95rem;       
+            font-style: italic;
+            color: var(--accent-color); 
+            margin: 0;
+            line-height: 1.1;         
+            white-space: nowrap;      
+        }
+
+        /* --- Elegant Notes List Layout --- */
+        .notes-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;                
+            width: 100%;
+        }
+
+        .notes-list li {
+            width: auto;
+        }
+
+        .notes-list a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-family: var(--font-main);
+            font-size: 1.15rem;       
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            transition: color 0.3s, letter-spacing 0.3s;
+            display: inline-block;
+        }
+
+        .notes-list a:hover {
+            color: var(--accent-color);     
+            letter-spacing: 1.5px; 
+        }
+
+        /* Switch Layout Mechanics */
+        .view {
+            display: none;
+            width: 100%;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        /* Centered Lone View Exhibit Space */
+        .back-btn {
+            background: none;
+            border: none;
+            font-family: var(--font-main);
+            color: var(--accent-color);
+            cursor: pointer;
+            padding: 0;
+            font-size: 1rem;          
+            margin-bottom: 25px;      
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .back-btn:hover {
+            color: var(--text-color);
+        }
+
+        .display-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .display-wrapper img {
+            width: 100%;
+            height: auto;
+            max-height: 50vh;         
+            border: 1px solid var(--border-color);
+            background-color: var(--img-fallback);
+        }
+
+        #exhibit-title {
+            font-size: 1.3rem;        
+            font-weight: 400;
+            margin: 23px 0 2px 0;     
+            letter-spacing: 0.5px;
+        }
+
+        #exhibit-date {
+            font-size: 0.95rem;       
+            font-style: italic;
+            color: var(--accent-color);
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <main class="content-area">
+            
+            <div id="index-view" class="view active">
+                
+                <header class="profile-header">
+                    
+                    <div class="profile-top-row">
+                        <div class="pfp-circle">
+                            <img src="1000007984.jpg" alt="Marie Winter">
+                        </div>
+                        <h1 class="handle">@marie.winter1</h1>
+                    </div>
+                    
+                    <p class="bio">"why don't we just paint the white roses red?"</p>
+                    
+                </header>
+
+                <ul class="notes-list">
+                    <li><a href="#" onclick="openExhibit('1000007979_2.jpg', 'Note I', 'June 2026')">Note I</a></li>
+                    <li><a href="#" onclick="openExhibit('1000007983.jpg', 'Note II', 'June 2026')">Note II</a></li>
+                    <li><a href="#" onclick="openExhibit('', 'Note III', 'June 2026')">Note III</a></li>
+                </ul>
+
+            </div>
+
+            <div id="lone-view" class="view">
+                <button class="back-btn" onclick="closeExhibit()">← back</button>
+                <div class="display-wrapper">
+                    <img id="exhibit-img" src="" alt="Exhibit">
+                    <h2 id="exhibit-title"></h2>
+                    <p id="exhibit-date"></p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        function openExhibit(imgSrc, title, date) {
+            document.getElementById('exhibit-img').src = imgSrc;
+            document.getElementById('exhibit-title').innerText = title;
+            document.getElementById('exhibit-date').innerText = date;
+            
+            document.getElementById('index-view').classList.remove('active');
+            document.getElementById('lone-view').classList.add('active');
+        }
+
+        function closeExhibit() {
+            document.getElementById('lone-view').classList.remove('active');
+            document.getElementById('index-view').classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
