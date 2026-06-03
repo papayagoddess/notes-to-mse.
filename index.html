@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notes to Mse.</title>
     
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Playfair+Display:ital,wght@1,400..700&display=swap" rel="stylesheet">
@@ -67,9 +72,9 @@
         .profile-top-row {
             display: flex;
             flex-direction: row;
-            align-items: flex-end;    /* Changed from center to snap text to the bottom line of the row */
+            align-items: flex-end;    
             gap: 14px;                
-            margin-bottom: 4px;       /* Tighter structural spacing above the bio line */
+            margin-bottom: 4px;       
         }
 
         .pfp-circle {
@@ -99,8 +104,8 @@
             letter-spacing: -0.2px;
             margin: 0;
             color: var(--text-color);
-            line-height: 1;           /* Snug line-height to remove extra inner-font padding */
-            padding-bottom: 4px;      /* Tiny micro-adjustment to frame the bottom baseline nicely */
+            line-height: 1;           
+            padding-bottom: 4px;      
         }
 
         /* Bio: Runs straight along the bottom right under the text baseline */
@@ -259,6 +264,16 @@
         function closeExhibit() {
             document.getElementById('lone-view').classList.remove('active');
             document.getElementById('index-view').classList.add('active');
+        }
+    </script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('Service Worker Registered successfully.'))
+                    .catch(err => console.log('Service Worker registration failed: ', err));
+            });
         }
     </script>
 
